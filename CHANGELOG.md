@@ -1,4 +1,4 @@
-## UNRELEASED
+## 0.6.0 (September 28, 2026)
 
 FEATURES:
 * **plugin/apm/instana**: Add Instana APM plugin with support for infrastructure metrics queries. Authenticate using the `api_token` config key or the `INSTANA_API_TOKEN` environment variable. [[GH-1311](https://github.com/hashicorp/nomad-autoscaler/pull/1311)]
@@ -6,6 +6,10 @@ FEATURES:
 IMPROVEMENTS:
 * plugin/apm/nomad: Add support for grouping nodes by `datacenter`, `node_pool`, or a combination of multiple pool identifiers in node pool APM queries. Previously only `node_class` was supported. [[GH-1300](https://github.com/hashicorp/nomad-autoscaler/pull/1300)]
 * policy/file: File-based scaling policies now support `jsonencode(...)` (for example in `check.query`). This makes complex JSON queries easier to write and maintain, since you can use native HCL objects instead of escaped JSON strings. [GH-1320](https://github.com/hashicorp/nomad-autoscaler/pull/1320)]
+
+BUG FIXES:
+* policy: Fixed a bug where policy handlers were not recreated for unchanged policies after the policy manager recovered from an unrecoverable source error, causing existing policies to stop being evaluated until they were updated again. [[GH-1336](https://github.com/hashicorp/nomad-autoscaler/pull/1336)]
+* scaleutils: After drain completes, the autoscaler now waits until all tasks on the node are dead before terminating the instance, preventing in-progress lifecycle tasks from being lost. [[GH-1337](https://github.com/hashicorp/nomad-autoscaler/pull/1337)]
 
 ## 0.5.0 (May 18, 2026)
 
